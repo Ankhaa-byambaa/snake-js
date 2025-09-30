@@ -57,8 +57,8 @@ function nextTick() {
       drawFood();
       drawSnake();
       moveSnake();
-      checkGameOver();
       nextTick();
+      checkGameOver();
     }, 80);
   } else {
     displayGameOver();
@@ -113,42 +113,37 @@ function changeDirection(event) {
   const goingDown = yVelocity === unitSize;
   const goingRight = xVelocity === unitSize;
   const goingLeft = xVelocity === -unitSize;
-
-  switch (running) {
-    case keyPressed == LEFT && !goingRight:
+  if ((running = true)) {
+    if (keyPressed == LEFT && !goingRight) {
       xVelocity = -unitSize;
       yVelocity = 0;
-      break;
-    case keyPressed == UP && !goingDown:
+    } else if (keyPressed == UP && !goingDown) {
       xVelocity = 0;
       yVelocity = -unitSize;
-      break;
-    case keyPressed == DOWN && !goingUp:
+    } else if (keyPressed == DOWN && !goingUp) {
       xVelocity = 0;
       yVelocity = unitSize;
-      break;
-    case keyPressed == RIGHT && !goingLeft:
+    } else if (keyPressed == RIGHT && !goingLeft) {
       xVelocity = unitSize;
       yVelocity = 0;
-      break;
+    }
   }
+
   //   console.log(keyPressed);
 }
 function checkGameOver() {
-  switch (running) {
-    case snake[0].x < 0:
+  if (running) {
+    if (snake[0].x < 0) {
       running = false;
-      break;
-    case snake[0].x >= gamewidth:
+    } else if (snake[0].x >= gamewidth) {
       running = false;
-      break;
-    case snake[0].y < 0:
+    } else if (snake[0].y < 0) {
       running = false;
-      break;
-    case snake[0].y >= gameHeight:
+    } else if (snake[0].y >= gameHeight) {
       running = false;
-      break;
+    }
   }
+
   for (let i = 1; i < snake.length; i += 1) {
     if (snake[0].x == snake[i].x && snake[i].y == snake[0].y) running = false;
   }
