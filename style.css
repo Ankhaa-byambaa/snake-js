@@ -1,0 +1,11 @@
+.gameContainer {
+  text-align: center;
+}
+.gameBoard {
+  background-color: rgb(6, 39, 75);
+  border: 3px solid black;
+}
+.scoreText {
+  font-family: "Mv Boli";
+  font-size: 100px;
+}
