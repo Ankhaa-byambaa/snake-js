@@ -1,13 +1,14 @@
 const gameBoard = document.querySelector("#gameBoard");
 const ctx = gameBoard.getContext("2d");
 const scoreText = document.querySelector("#scoreText");
+const ResetButton=document.getElementById("btn")
 const gamewidth = gameBoard.width;
 const gameHeight = gameBoard.height;
 const snakeColor = "rgb(0, 255, 0)";
 const snakeBorder = "black";
 const foodColor = "red";
 const unitSize = 25;
-const boardBackground = "rgb(6, 39, 75)";
+const boardBackground = "rgb(53, 113, 176)";
 
 let running = false;
 let xVelocity = unitSize;
@@ -38,18 +39,25 @@ let snake = [
     y: 0,
   },
 ];
+
 window.addEventListener("keydown", changeDirection);
-gameStart();
+gameStart()
+
+
+
+
 
 function gameStart() {
   running = true;
-  scoreText.textContent = score;
+
   createFood();
   drawFood();
   nextTick();
   moveSnake();
   drawSnake();
+  hahahah()
 }
+
 function nextTick() {
   if (running) {
     setTimeout(() => {
@@ -59,7 +67,7 @@ function nextTick() {
       moveSnake();
       nextTick();
       checkGameOver();
-    }, 200);
+    }, 75);
   } else {
     displayGameOver();
   }
@@ -81,10 +89,11 @@ function drawFood() {
   ctx.fillStyle = foodColor; //food color
   ctx.fillRect(foodX, foodY, unitSize, unitSize); //food Rectangle
 }
-function moveSnke() {
+function moveSnake() {
   const head = { x: snake[0].x + xVelocity, y: snake[0].y + yVelocity };
   snake.unshift(head); //add body
   //if food is eaten
+
   if (snake[0].x == foodX && snake[0].y == foodY) {
     score++;
     scoreText.textContent = score;
@@ -100,6 +109,10 @@ function drawSnake() {
     ctx.fillRect(snakePart.x, snakePart.y, unitSize, unitSize);
     ctx.strokeRect(snakePart.x, snakePart.y, unitSize, unitSize);
   });
+}
+function hahahah(){
+  const keyPressed = event.keyCode;
+  console.log(keyPressed)
 }
 function changeDirection(event) {
   const keyPressed = event.keyCode;
@@ -147,8 +160,9 @@ function checkGameOver() {
   for (let i = 1; i < snake.length; i += 1) {
     if (snake[0].x == snake[i].x && snake[i].y == snake[0].y) running = false;
   }
-  scoreText.textContent = 0;
+ 
 }
+
 function displayGameOver() {
   ctx.font = "50px Mv Boli";
   ctx.fillStyle = "white";
